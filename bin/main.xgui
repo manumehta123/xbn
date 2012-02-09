@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xgui version="1.0" name="main">
+  <sgui:object dock="ABSOLUTE" class="window" name="main.xgui" init-script="print( 'Hallo!' );" left="200" top="150" width="200" height="200">
+	<sgui:object dock="BOTTOM" name="progressbar" class="progressbar" value="0" height="16" onclick-script="print('uups!');">
+  loading...
+	</sgui:object>
+	<sgui:object dock="FILL" name="image" class="image" texture="textures/titel.png">
+  qt3d sample 
+  by Thomas Kraus
+  2010(c)
+	</sgui:object>
+  </sgui:object>
+</xgui>

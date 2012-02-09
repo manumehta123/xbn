@@ -1,0 +1,18 @@
+#-------------------------------------------------------
+# .hgignore: Files that Mercurial should ignore
+#-------------------------------------------------------
+
+# Use glob syntax
+syntax: glob
+
+# Ignore object files
+*.obj
+*.o
+*.a
+ 
+# Ignore executables
+*.exe
+*.
+
+#-------------------------------------------------------
+

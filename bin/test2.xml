@@ -1,0 +1,22 @@
+<?xml encode="UTF-8"?>
+<!-- Hallo -->
+<test>
+	<a test="Hallo&amp;" text="Tach"/>
+	<!-- und noch ein Comment-->
+	<b>Hallo B!! lf&#10;lf</b>
+	<c name="subnode c">
+		<c2 wert="12"/>
+		<c3 id="666-8" wert="8"/>
+		<c3 id="666-9" wert="9"/>
+		<c3 id="666-11" wert="11"/>
+	</c>
+	<d>
+		<![CDATA[Hallo, das ist ein cdata block 10>9 und 9<10 -- mal gucken... ]]>
+	</d>
+	<d wert="99">
+		<name>hund</name>
+	</d>
+	<uc1:test2 wert="uc1">
+		<d wert="44"/>
+	</uc1:test2>
+</test>

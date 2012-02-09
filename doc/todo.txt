@@ -1,0 +1,138 @@
+/*
+	libxbn is a small and tiny xml binary node
+	Copyright (C) 2010  Thomas Kraus (thomentor@gmx.de)
+
+	This library is free software; you can redistribute it and/or modify it
+	under the terms of the GNU Lesser General Public License as published by
+	the Free Software Foundation; either version 2.1 of the License, or
+	(at your option) any later version.
+
+	This library is distributed in the hope that it will be useful, but
+	WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+	or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+	 License for more details.
+
+	You should have received a copy of the GNU Lesser General Public License
+	along with this library; if not, write to the Free Software Foundation,
+	Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
+*/
+Name		libxbn
+Description	lightwight xml binary node system
+
+binaries:
+libxbn		xbn library
+xsltp		xslt processor		xsltp input.xsl input.xml
+xpath		xpath processor		xpath input.xml xpath
+xmlos		xml os				xmlos input.xml
+testxbn		testunit xbnlib		testxbn
+
+
+
+date			version		time	description
+2010-09-09		0.1			8		initial setup, xbnode|xbnparser|xbndata
+2010-09-10		0.1			12		xpath,xpath_plugin infrastruktur
+2010-09-15		0.2			8		xbn xpath_plugins (logik,arithmetisch,knoten operanden)
+									xbnnode- get"Type"() is"Type"(), diverse xpath1.0 plugins
+2010-09-16		0.3			4		sprt smartpointer engine und implementierung (sprt_base) fuer xbnode
+									xbn:pipe, * @* implementiert - conditionen implementiert
+2010 09	17		0.4			8		dynamische verwaltung aller Objekte mittel sprt_base und sprt<> pointern
+2010-09-20		0.5			4		sptr auf sptr_class, sptr_base umgestellt. sptr_class::cleanup, sptr_class::gc vorgesehen
+2010-09-22		0.6			4		xsltp engine & plugins ruempfe implementiert
+2010-09-27		0.7			4		xslt demo1 laeuft fast durch (probleme mit doppelten Attributen und fehlendem Text)
+2010-09-28		0.7b		3		Projekt umstrukturierung, auslagerung der plugins in seperate files - xbnode dokumentation, createNode/removeNode helper
+2010-09-29		0.7c		4		Basis Implementierung diverse xsl: funktionen, implementierung von xpath, xsltp und xmlos projekten
+2010-10-03		0.8			4		umbenennung member Variablen Value und Name in m_Value und m_Name,
+									std::list::size() aufrufe als problematisch erkannt und soweit wie moeglich entfernt
+2010-10-04		0.8b		6		xbnparser strukturiertere neu implementierung  xbdata::read neu implementierung auf basis von xbnparser
+									m_Value entfernt - dafür !TEXT Node als Datenspeicher, setValue,getValue angepasst. getValueNode()
+									und appendValueNode() implementiert. subtext zugriff auf /test/d/name/text() repariert
+2010-10-05		0.8c		2		xpath_axis implementiert - so sollten die meisten achsen funktionieren (child:: etc)
+									comment(), node() implementiert
+2010-10-06		0.8d		2		xbstring entfernt da keinerlei vorteile dadurch nachweisbar waren - evtl als string ptr collection
+									umimplementieren wie seinerzeit xmlPString. generate-id() funktionstuechtig
+2010-10-07		0.8e				xsl:with-param, xsl-param, xsl:sort in apply-templates, xsl:call-template implementiert
+
+Ziel 0.9:
+	-	weitere xsl funktionen implementieren,
+	-	testUnit fuer xslt plugins entwerfen und umsetzen
+	-	Speicherverwaltung ueberpruefen und ggf verbessern
+	-	Memory leaks suchen und ausbessern
+
+Ziel 1.0
+	-	xmldb		server/client interface via cout/clog/cerr und cin, basierend auf xmlos?
+		xslws		xslt basierter Webserver welcher eine xmldb als backend benutzt?
+
+		xscript		eine xml/xslt basierte Skriptsprache (erweiterung fuer xpath & xsl )
+		xcode		xscript oppcode
+		xproc		xscript engine
+
+xscript:
+	- create-node( parent-node, nodetype ) := current_node
+	- create-node( nodetype ) := new_node
+	- remove-node( node ) := current_node
+	- set( node, data )   := current_node
+	- set( data )         := current_node
+	- dim-var( var-name, var-data )
+	- let-var( var-name, var-data )
+	- inc-var( var-name )
+	- dec-var( var-name )
+	- range( von, bis )   := >von|...|bis
+
+<xsl:foreach select="1|2|3|4"> bzw range(1,4)
+	<xsl:value-of select="set( @text() )"/>
+</xsl:foreach>
+
+
+event_trigger ?
+
+front_end(xgui) <-> backend_code()
+						<-> xmldb_instanz()
+						<-> xslws_instanz()
+
+	Client		->		Server
+	-send		cin->	-recieve
+	-recieve	cout<-	-send
+				cerr<-	-raiseError
+				clog<-	-message
+
+class xbn_client:
+	startup_engine()
+	shutdown_engine()
+
+	msgid = send( cmd )
+	receive_queue( &msg_id, cmd_result )
+
+
+
+
+ggf. generatoren bzw node-pipes fuer parallele verarbeitung von Knotenlisten pruefen
+(umsetzbarkeit, performance fragen, mtlock fragen etc)
+
+ggf. eigene std::list implementieren (zb wegen size() :/ )
+
+
+UnitTest Status:
+
+xbn_xpath::testUnit() done
+--------------------------------------------------
+> successfuly 31
+> problems 2
+> totaly run 33
+--------------------------------------------------
+
+xbn_xslt::testUnit() done
+--------------------------------------------------
+> successfuly 0
+> problems 22
+> totaly run 22
+--------------------------------------------------
+
+
+ToDo:
+Garbage collector
+
+todo  V1.0:
+- xpath 1.0
+- xslt  1.0
+
+
