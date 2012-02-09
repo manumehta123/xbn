@@ -5,9 +5,6 @@
   loading...
 	</sgui:object>
 	<sgui:object dock="FILL" name="image" class="image" texture="textures/titel.png">
-  qt3d sample 
-  by Thomas Kraus
-  2010(c)
 	</sgui:object>
   </sgui:object>
 </xgui>
